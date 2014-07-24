@@ -33,8 +33,8 @@ public class UsuariosController {
 		Statement stmt = conn.createStatement();
 		ResultSet rs;
 
-		rs = stmt.executeQuery("select * from usuarios where username = '"
-				+ filtro + "'");
+		rs = stmt.executeQuery("select * from usuarios where username like '%"
+				+ filtro + "%'");
 
 		while (rs.next()) {
 			usuarios.add(rs.getString("username"));
